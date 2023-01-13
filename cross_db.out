@@ -1,63 +1,24 @@
-<?xml version="1.0" ?>
-<databases>
-  <database name="postgres">
-    <columns>
-      <column>connections</column>
-      <column>commits</column>
-      <column>rollbacks</column>
-      <column>blocks_fetched</column>
-      <column>blocks_hit</column>
-      <column>tuples_returned</column>
-      <column>tuples_fetched</column>
-      <column>tuples_inserted</column>
-      <column>tuples_updated</column>
-      <column>tuples_deleted</column>
-      <column>deadlocks</column>
-    </columns>
-    <row>(1, 11173, 65, 11744073, 10639318, 33910547, 130205, 40004003, 97, 396, 0)</row>
-    <row>(0, 2581, 16, 11851686, 10376734, 41038722, 38563, 50004693, 414, 15, 0)</row>
-    <row>(0, 9516, 0, 402756, 400992, 3845733, 90321, 16227, 743, 34, 0)</row>
-    <row>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)</row>
-    <row>(0, 2310, 8, 1163983, 151786, 31012319, 30716, 30003535, 6, 0, 0)</row>
-  </database>
-  <database name="testdb">
-    <columns>
-      <column>connections</column>
-      <column>commits</column>
-      <column>rollbacks</column>
-      <column>blocks_fetched</column>
-      <column>blocks_hit</column>
-      <column>tuples_returned</column>
-      <column>tuples_fetched</column>
-      <column>tuples_inserted</column>
-      <column>tuples_updated</column>
-      <column>tuples_deleted</column>
-      <column>deadlocks</column>
-    </columns>
-    <row>(0, 11174, 65, 11744197, 10639442, 33910587, 130245, 40004003, 97, 396, 0)</row>
-    <row>(1, 2582, 16, 11851717, 10376765, 41038737, 38577, 50004693, 414, 15, 0)</row>
-    <row>(0, 9516, 0, 402756, 400992, 3845733, 90321, 16227, 743, 34, 0)</row>
-    <row>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)</row>
-    <row>(0, 2310, 8, 1163983, 151786, 31012319, 30716, 30003535, 6, 0, 0)</row>
-  </database>
-  <database name="foodb">
-    <columns>
-      <column>connections</column>
-      <column>commits</column>
-      <column>rollbacks</column>
-      <column>blocks_fetched</column>
-      <column>blocks_hit</column>
-      <column>tuples_returned</column>
-      <column>tuples_fetched</column>
-      <column>tuples_inserted</column>
-      <column>tuples_updated</column>
-      <column>tuples_deleted</column>
-      <column>deadlocks</column>
-    </columns>
-    <row>(0, 11174, 65, 11744197, 10639442, 33910587, 130245, 40004003, 97, 396, 0)</row>
-    <row>(0, 2583, 16, 11851841, 10376889, 41038777, 38617, 50004693, 414, 15, 0)</row>
-    <row>(0, 9516, 0, 402756, 400992, 3845733, 90321, 16227, 743, 34, 0)</row>
-    <row>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)</row>
-    <row>(1, 2311, 8, 1164014, 151817, 31012334, 30730, 30003535, 6, 0, 0)</row>
-  </database>
-</databases>
+Results for postgres:
+Columns: connections commits rollbacks blocks_fetched blocks_hit tuples_returned tuples_fetched tuples_inserted tuples_updated tuples_deleted deadlocks
+(1, 11227, 65, 11746772, 10642017, 33922877, 131003, 40004003, 97, 396, 0)
+(0, 2623, 16, 11853793, 10378841, 41051679, 39137, 50004693, 414, 15, 0)
+(0, 9544, 0, 403778, 402014, 3857983, 90517, 16227, 743, 34, 0)
+(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+(0, 2352, 8, 1166090, 153893, 31025178, 31290, 30003535, 6, 0, 0)
+
+Results for testdb:
+Columns: connections commits rollbacks blocks_fetched blocks_hit tuples_returned tuples_fetched tuples_inserted tuples_updated tuples_deleted deadlocks
+(0, 11228, 65, 11746896, 10642141, 33922917, 131043, 40004003, 97, 396, 0)
+(1, 2624, 16, 11853824, 10378872, 41051694, 39151, 50004693, 414, 15, 0)
+(0, 9544, 0, 403778, 402014, 3857983, 90517, 16227, 743, 34, 0)
+(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+(0, 2352, 8, 1166090, 153893, 31025178, 31290, 30003535, 6, 0, 0)
+
+Results for foodb:
+Columns: connections commits rollbacks blocks_fetched blocks_hit tuples_returned tuples_fetched tuples_inserted tuples_updated tuples_deleted deadlocks
+(0, 11228, 65, 11746896, 10642141, 33922917, 131043, 40004003, 97, 396, 0)
+(0, 2625, 16, 11853948, 10378996, 41051734, 39191, 50004693, 414, 15, 0)
+(0, 9544, 0, 403778, 402014, 3857983, 90517, 16227, 743, 34, 0)
+(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+(1, 2353, 8, 1166121, 153924, 31025193, 31304, 30003535, 6, 0, 0)
+

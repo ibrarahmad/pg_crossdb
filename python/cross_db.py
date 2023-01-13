@@ -81,9 +81,10 @@ def write_output_to_json_file(output, file):
     Writes the query output to the specified file in a pretty JSON format.
     """
     data = {}
-    for (db, rows) in output:
-        data[db] = [row for row in rows]
-
+    for (db, columns, rows) in output:
+        data[db] = {}
+        data[db]['columns'] = columns
+        data[db]['rows'] = rows
     with open(file, 'w') as f:
         json.dump(data, f, indent=2)
 
@@ -92,8 +93,9 @@ def write_output_to_file(output, file):
     Writes the query output to the specified file in a more readable format
     """
     with open(file, 'w') as f:
-        for (db, rows) in output:
+        for (db, columns, rows) in output:
             f.write(f'Results for {db}:\n')
+            f.write('Columns: ' + ' '.join(columns) + '\n')
             for row in rows:
                 f.write(str(row) + '\n')
             f.write('\n')
@@ -121,3 +123,5 @@ if __name__ == "__main__":
         write_output_to_xml_file(output, output_file)
     elif output_format == "json":
         write_output_to_json_file(output, output_file)
+    else:
+        print("Usage: python script.py config.ini query.sql output.out [xml|json|txt]")
