@@ -1,5 +1,3 @@
-# pg_crossdb
-
 # PostgreSQL Multi-DB Query Runner
 
 This repository contains scripts that can be used to run a SQL query on all databases within a PostgreSQL server. The scripts connect to the PostgreSQL server, retrieve a list of all databases, and execute the specified SQL query on each database. The results of the query will be written to an output file in a more readable format.
