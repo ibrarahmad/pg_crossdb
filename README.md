@@ -29,7 +29,7 @@ python cross_db.py cross_db.conf cross_db.sql cross_db.out
 #### Requirements for python
  - psycopg2 library
 
-#### Run the script
+### RUST Script
 The Rust script is a command line application that can be used to run a SQL query on all databases within a PostgreSQL server. The script connects to the PostgreSQL server, retrieves a list of all databases, and executes the specified SQL query on each database. The results of the query will be written to an output file in a more readable format.
 
 ```bash
