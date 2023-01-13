@@ -83,25 +83,65 @@ LIMIT 3;
 }
 ```
 
+#### Sample SQL
+```sql
+SELECT 
+    pg_stat_get_db_numbackends(oid) AS "connections", 
+    pg_stat_get_db_xact_commit(oid) AS "commits", 
+    pg_stat_get_db_xact_rollback(oid) AS "rollbacks", 
+    pg_stat_get_db_blocks_fetched(oid) AS "blocks_fetched", 
+    pg_stat_get_db_blocks_hit(oid) AS "blocks_hit", 
+    pg_stat_get_db_tuples_returned(oid) AS "tuples_returned", 
+    pg_stat_get_db_tuples_fetched(oid) AS "tuples_fetched", 
+    pg_stat_get_db_tuples_inserted(oid) AS "tuples_inserted", 
+    pg_stat_get_db_tuples_updated(oid) AS "tuples_updated", 
+    pg_stat_get_db_tuples_deleted(oid) AS "tuples_deleted", 
+    pg_stat_get_db_deadlocks(oid) AS "deadlocks" 
+FROM pg_database; 
+```
 #### Sample outputs in XML
 
-```xml
 <?xml version="1.0" ?>
 <databases>
   <database name="postgres">
-    <row>('public.pgbench_account_postgresl', '4486 MB')</row>
-    <row>('public.foo', '346 MB')</row>
-    <row>('public.pgbench_tellers', '256 kB')</row>
+    <columns>
+      <column>connections</column>
+      <column>commits</column>
+      <column>rollbacks</column>
+      <column>blocks_fetched</column>
+      <column>blocks_hit</column>
+      <column>tuples_returned</column>
+      <column>tuples_fetched</column>
+      <column>tuples_inserted</column>
+      <column>tuples_updated</column>
+      <column>tuples_deleted</column>
+      <column>deadlocks</column>
+    </columns>
+    <row>(1, 11173, 65, 11744073, 10639318, 33910547, 130205, 40004003, 97, 396, 0)</row>
+    <row>(0, 2581, 16, 11851686, 10376734, 41038722, 38563, 50004693, 414, 15, 0)</row>
+    <row>(0, 9516, 0, 402756, 400992, 3845733, 90321, 16227, 743, 34, 0)</row>
+    <row>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)</row>
+    <row>(0, 2310, 8, 1163983, 151786, 31012319, 30716, 30003535, 6, 0, 0)</row>
   </database>
   <database name="testdb">
-    <row>('public.pgbench_accounts', '5981 MB')</row>
-    <row>('public.test_tb', '422 MB')</row>
-    <row>('public.pgbench_tellers', '312 kB')</row>
-  </database>
-  <database name="foodb">
-    <row>('public.pgbench_accounts', '4486 MB')</row>
-    <row>('public.pgbench_tellers', '256 kB')</row>
-    <row>('public.pgbench_branches', '64 kB')</row>
+    <columns>
+      <column>connections</column>
+      <column>commits</column>
+      <column>rollbacks</column>
+      <column>blocks_fetched</column>
+      <column>blocks_hit</column>
+      <column>tuples_returned</column>
+      <column>tuples_fetched</column>
+      <column>tuples_inserted</column>
+      <column>tuples_updated</column>
+      <column>tuples_deleted</column>
+      <column>deadlocks</column>
+    </columns>
+    <row>(0, 11174, 65, 11744197, 10639442, 33910587, 130245, 40004003, 97, 396, 0)</row>
+    <row>(1, 2582, 16, 11851717, 10376765, 41038737, 38577, 50004693, 414, 15, 0)</row>
+    <row>(0, 9516, 0, 402756, 400992, 3845733, 90321, 16227, 743, 34, 0)</row>
+    <row>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)</row>
+    <row>(0, 2310, 8, 1163983, 151786, 31012319, 30716, 30003535, 6, 0, 0)</row>
   </database>
 </databases>
 ```
