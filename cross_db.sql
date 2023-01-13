@@ -1,19 +1,14 @@
-WITH table_sizes AS (
-    SELECT
-        table_schema || '.' || table_name AS table_name,
-        pg_total_relation_size(table_schema || '.' || table_name) AS table_size
-    FROM
-        information_schema.tables
-    WHERE
-        table_schema NOT LIKE 'pg_%'
-        AND table_schema != 'information_schema'
-    ORDER BY
-        table_size DESC
-)
-SELECT
-    table_name,
-    pg_size_pretty(table_size) AS pretty_size
-FROM
-    table_sizes
-LIMIT 3;
+SELECT 
+    pg_stat_get_db_numbackends(oid) AS "connections", 
+    pg_stat_get_db_xact_commit(oid) AS "commits", 
+    pg_stat_get_db_xact_rollback(oid) AS "rollbacks", 
+    pg_stat_get_db_blocks_fetched(oid) AS "blocks_fetched", 
+    pg_stat_get_db_blocks_hit(oid) AS "blocks_hit", 
+    pg_stat_get_db_tuples_returned(oid) AS "tuples_returned", 
+    pg_stat_get_db_tuples_fetched(oid) AS "tuples_fetched", 
+    pg_stat_get_db_tuples_inserted(oid) AS "tuples_inserted", 
+    pg_stat_get_db_tuples_updated(oid) AS "tuples_updated", 
+    pg_stat_get_db_tuples_deleted(oid) AS "tuples_deleted", 
+    pg_stat_get_db_deadlocks(oid) AS "deadlocks" 
+FROM pg_database; 
 

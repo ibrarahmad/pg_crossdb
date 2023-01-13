@@ -5,6 +5,7 @@ import configparser
 import sys
 import xml.etree.ElementTree as ET
 import json
+from xml.dom import minidom
 
 def read_config(config_file):
     """
@@ -52,19 +53,21 @@ def run_query(config, sql_file, db):
         ) as conn:
             with conn.cursor() as cur:
                 cur.execute(open(sql_file, 'r').read())
-                return (db, cur.fetchall())
+                columns = [desc[0] for desc in cur.description]
+                return (db, columns, cur.fetchall())
     except (Exception, psycopg2.Error) as error:
         print(f"Error while connecting to PostgreSQL: {error}")
-
-from xml.dom import minidom
 
 def write_output_to_xml_file(output, file):
     """
     Writes the query output to the specified file in a pretty XML format.
     """
     root = ET.Element("databases")
-    for (db, rows) in output:
+    for (db, columns, rows) in output:
         db_element = ET.SubElement(root, "database", name=db)
+        columns_element = ET.SubElement(db_element, "columns")
+        for column in columns:
+            ET.SubElement(columns_element, "column").text = column
         for row in rows:
             ET.SubElement(db_element, "row").text = str(row)
 
