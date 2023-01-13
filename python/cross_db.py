@@ -3,6 +3,8 @@
 import psycopg2
 import configparser
 import sys
+import xml.etree.ElementTree as ET
+import json
 
 def read_config(config_file):
     """
@@ -54,6 +56,34 @@ def run_query(config, sql_file, db):
     except (Exception, psycopg2.Error) as error:
         print(f"Error while connecting to PostgreSQL: {error}")
 
+from xml.dom import minidom
+
+def write_output_to_xml_file(output, file):
+    """
+    Writes the query output to the specified file in a pretty XML format.
+    """
+    root = ET.Element("databases")
+    for (db, rows) in output:
+        db_element = ET.SubElement(root, "database", name=db)
+        for row in rows:
+            ET.SubElement(db_element, "row").text = str(row)
+
+    rough_string = ET.tostring(root, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    with open(file, 'w') as f:
+        f.write(reparsed.toprettyxml(indent="  "))
+
+def write_output_to_json_file(output, file):
+    """
+    Writes the query output to the specified file in a pretty JSON format.
+    """
+    data = {}
+    for (db, rows) in output:
+        data[db] = [row for row in rows]
+
+    with open(file, 'w') as f:
+        json.dump(data, f, indent=2)
+
 def write_output_to_file(output, file):
     """
     Writes the query output to the specified file in a more readable format
@@ -66,15 +96,25 @@ def write_output_to_file(output, file):
             f.write('\n')
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python script.py config.ini query.sql output.txt")
+    if len(sys.argv) < 4:
+        print("Usage: python script.py config.ini query.sql output.out [xml|json|txt]")
         sys.exit()
 
-    config_file, sql_file, output_file = sys.argv[1:]
+    if len(sys.argv) == 4:
+        config_file, sql_file, output_file = sys.argv[1:]
+        output_format = "xml"
+
+    if len(sys.argv) == 5:
+        config_file, sql_file, output_file, output_format = sys.argv[1:]
+    
     config = read_config(config_file)
     databases = get_databases(config)
     output = []
     for db in databases:
         output.append(run_query(config, sql_file, db))
-    write_output_to_file(output, output_file)
-
+    if output_format == "txt":
+        write_output_to_file(output, output_file)
+    elif output_format == "xml":
+        write_output_to_xml_file(output, output_file)
+    elif output_format == "json":
+        write_output_to_json_file(output, output_file)
