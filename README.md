@@ -101,6 +101,7 @@ FROM pg_database;
 ```
 #### Sample outputs in XML
 
+```xml
 <?xml version="1.0" ?>
 <databases>
   <database name="postgres">
